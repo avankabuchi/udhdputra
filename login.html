@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UD. HD Putra</title>
+    <link rel="stylesheet" href="styles.css"> </head>
+<body class="login-body"> <div class="login-background"></div> <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="login-container"> <div class="login-card">
+            <div class="logo-section">
+                <div class="logo">HD</div>
+                <h1 class="company-name">UD. HD Putra</h1>
+                <p class="tagline">Sistem Manajemen Pembelian & Penjualan Kayu</p>
+            </div>
+
+            <form action="login.php" method="POST" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        class="form-input" 
+                        placeholder="Masukkan username Anda"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Masukkan password Anda"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="login-button" id="loginBtn">
+                    Masuk ke Dashboard
+                </button>
+
+                <div class="forgot-password">
+                    <a href="#" onclick="alert('Hubungi administrator untuk reset password')">Lupa password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced form interaction
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const button = document.getElementById('loginBtn');
+            button.classList.add('loading');
+            button.textContent = 'Memproses...';
+        });
+
+        // Input focus animations
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+        // Keyboard navigation enhancement
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.id === 'username') {
+                    document.getElementById('password').focus();
+                }
+            }
+        });
+
+        // Add some interactive particles on click
+        document.addEventListener('click', function(e) {
+            createRipple(e.pageX, e.pageY);
+        });
+
+        function createRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '6px';
+            ripple.style.height = '6px';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.animation = 'rippleEffect 0.6s ease-out';
+            ripple.style.zIndex = '1000';
+            
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+    </script>
+</body>
+</html>
